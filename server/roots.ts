@@ -30,12 +30,17 @@ export const roots: Map<string | undefined, Root[]> = new Map<
  */
 export const syncRoots = async (server: McpServer, sessionId?: string) => {
   const clientCapabilities = server.server.getClientCapabilities() || {};
+  console.error(
+    "CLIENT CAPABILITIES:",
+    JSON.stringify(clientCapabilities, null, 2)
+  );
   const clientSupportsRoots: boolean = clientCapabilities?.roots !== undefined;
 
   // Fetch the roots list for this client
   if (clientSupportsRoots) {
     // Function to request the updated roots list from the client
     const requestRoots = async () => {
+      console.error("hi")
       try {
         // Request the updated roots list from the client
         const response = await server.server.listRoots();
@@ -50,7 +55,7 @@ export const syncRoots = async (server: McpServer, sessionId?: string) => {
               logger: "everything-server",
               data: `Roots updated: ${response?.roots?.length} root(s) received from client`,
             },
-            sessionId
+            sessionId,
           );
         } else {
           await server.sendLoggingMessage(
@@ -59,14 +64,14 @@ export const syncRoots = async (server: McpServer, sessionId?: string) => {
               logger: "everything-server",
               data: "Client returned no roots set",
             },
-            sessionId
+            sessionId,
           );
         }
       } catch (error) {
         console.error(
           `Failed to request roots from client ${sessionId}: ${
             error instanceof Error ? error.message : String(error)
-          }`
+          }`,
         );
       }
     };
@@ -77,7 +82,7 @@ export const syncRoots = async (server: McpServer, sessionId?: string) => {
       // Set the list changed notification handler
       server.server.setNotificationHandler(
         RootsListChangedNotificationSchema,
-        requestRoots
+        requestRoots,
       );
 
       // Request the initial roots list immediately

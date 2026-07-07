@@ -8,8 +8,8 @@ import { readFileSync } from "fs";
  * @param server
  */
 export const registerResources = (server: McpServer) => {
-    //     registerResourceTemplates(server);
-    //     registerFileResources(server);
+  //     registerResourceTemplates(server);
+  //     registerFileResources(server);
 };
 
 /**
@@ -20,16 +20,16 @@ export const registerResources = (server: McpServer) => {
  * @returns {string} the content of the server instructions file, or an error message if reading fails.
  */
 export function readInstructions(): string {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
-    const filePath = join(__dirname, "..", "docs", "instructions.md");
-    let instructions;
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+  const filePath = join(__dirname, "..", "docs", "instructions.md");
+  let instructions;
 
-    try {
-        instructions = readFileSync(filePath, "utf-8");
-    } catch (e) {
-        instructions = "Server instructions not loaded: " + e;
-    }
+  try {
+    instructions = readFileSync(filePath, "utf-8");
+  } catch (e) {
+    instructions = "Server instructions not loaded: " + e;
+  }
 
-    return instructions;
+  return instructions;
 }
