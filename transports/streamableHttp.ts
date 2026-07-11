@@ -41,6 +41,7 @@ console.log("Starting Streamable HTTP server...");
 
 // Express app with permissive CORS for testing with Inspector direct connect mode
 const app = express();
+app.use(express.json());
 app.use(
   cors({
     origin: "*", // use "*" with caution in production
@@ -102,7 +103,7 @@ app.post("/mcp", async (req: Request, res: Response) => {
       // Connect the transport to the MCP server BEFORE handling the request
       // so responses can flow back through the same transport
       await server.connect(transport);
-      await transport.handleRequest(req, res);
+      await transport.handleRequest(req, res, req.body);
       return;
     } else {
       // Invalid request - no session ID or not initialization request
@@ -119,7 +120,7 @@ app.post("/mcp", async (req: Request, res: Response) => {
 
     // Handle the request with existing transport - no need to reconnect
     // The existing transport is already connected to the server
-    await transport.handleRequest(req, res);
+    await transport.handleRequest(req, res, req.body);
   } catch (error) {
     console.log("Error handling MCP request:", error);
     if (!res.headersSent) {
