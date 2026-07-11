@@ -30,12 +30,12 @@ describe("Server Factory", () => {
     });
 
     it("should allow multiple servrs to be created", () => {
-        const result1 = createServer();
-        const result2 = createServer();
+      const result1 = createServer();
+      const result2 = createServer();
 
-        expect(result1.server).toBeDefined();
-        expect(result2.server).toBeDefined();
-        expect(result1.server).not.toBe(result2.server);
+      expect(result1.server).toBeDefined();
+      expect(result2.server).toBeDefined();
+      expect(result1.server).not.toBe(result2.server);
     });
   });
 });

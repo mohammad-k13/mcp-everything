@@ -12,14 +12,10 @@ async function run() {
         // Import and run the default server
         await import("./transports/stdio.js");
         break;
-      // case "sse":
-      //   // Import and run the SSE server
-      //   await import("./transports/sse.js");
-      //   break;
-      // case "streamableHttp":
-      //   // Import and run the streamable HTTP server
-      //   await import("./transports/streamableHttp.js");
-      //   break;
+      case "streamableHttp":
+        // Import and run the streamable HTTP server
+        await import("./transports/streamableHttp.js");
+        break;
       default:
         console.error(`-`.repeat(53));
         console.error(`  Everything Server Launcher`);

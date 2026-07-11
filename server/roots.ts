@@ -32,7 +32,7 @@ export const syncRoots = async (server: McpServer, sessionId?: string) => {
   const clientCapabilities = server.server.getClientCapabilities() || {};
   console.error(
     "CLIENT CAPABILITIES:",
-    JSON.stringify(clientCapabilities, null, 2)
+    JSON.stringify(clientCapabilities, null, 2),
   );
   const clientSupportsRoots: boolean = clientCapabilities?.roots !== undefined;
 
@@ -40,7 +40,7 @@ export const syncRoots = async (server: McpServer, sessionId?: string) => {
   if (clientSupportsRoots) {
     // Function to request the updated roots list from the client
     const requestRoots = async () => {
-      console.error("hi")
+      console.error("hi");
       try {
         // Request the updated roots list from the client
         const response = await server.server.listRoots();

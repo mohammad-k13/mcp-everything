@@ -16,7 +16,7 @@ import {
 // Server Factory response
 export type ServerFactoryResponse = {
   server: McpServer;
-  cleanup: () => void;
+  cleanup: (sessionId?: string) => void;
 };
 
 /**
