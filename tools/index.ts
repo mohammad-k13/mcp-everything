@@ -1,5 +1,6 @@
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp";
 import { registerEchoTool } from "./echo.js";
+import { registerGetAnnotatedMessageTool } from "./get-annotated-message.js";
 
 /**
  * Register the tools with the MCP server.
@@ -7,6 +8,7 @@ import { registerEchoTool } from "./echo.js";
  */
 export const registerTools = (server: McpServer) => {
   registerEchoTool(server);
+  registerGetAnnotatedMessageTool(server);
 };
 
 /**
