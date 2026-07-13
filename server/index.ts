@@ -12,6 +12,7 @@ import {
   LoggingLevelSchema,
   LoggingMessageNotificationSchema,
 } from "@modelcontextprotocol/sdk/types.js";
+import { setSubscriptionHandlers } from "../resources/subscriptions.js";
 
 // Server Factory response
 export type ServerFactoryResponse = {
@@ -87,13 +88,8 @@ export const createServer: () => ServerFactoryResponse = () => {
   // Register the prompts
   registerPrompts(server);
 
-  //   server.server.setRequestHandler(InitializeRequestSchema, async (request) => {
-  //     console.log("initialize request", request.method);
-  //     return request;
-  //   });
-
   // Set resource subscription handlers
-  // setSubscriptionHandlers(server);
+  setSubscriptionHandlers(server);
   server.server.oninitialized = async () => {
     // Register conditional tools now that client capabilities are known.
     // This finishes before the `notifications/initialized` handler finishes.

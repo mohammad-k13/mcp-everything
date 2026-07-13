@@ -1,7 +1,6 @@
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import  type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { z } from "zod";
-import type { ToolConfig } from "../types/index.js";
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 
 // Tool input schema
 export const EchoSchema = z.object({
@@ -10,7 +9,7 @@ export const EchoSchema = z.object({
 
 // Tool configuration
 const name = "echo";
-const config: ToolConfig = {
+const config = {
   title: "Echo Tool",
   description: "Echoes back the input string",
   inputSchema: EchoSchema,
@@ -22,12 +21,20 @@ const config: ToolConfig = {
   },
 };
 
+/**
+ * Registers the 'echo' tool.
+ *
+ * The registered tool validates input arguments using the EchoSchema and
+ * returns a response that echoes the message provided in the arguments.
+ *
+ * @param {McpServer} server - The McpServer instance where the tool will be registered.
+ * @returns {void}
+ */
 export const registerEchoTool = (server: McpServer) => {
-  server.registerTool(name, config, async (args: any): Promise<CallToolResult> => {
-    console.log('args', args)
-    const validateArgs = EchoSchema.parse(args);
+  server.registerTool(name, config, async (args): Promise<CallToolResult> => {
+    const validatedArgs = EchoSchema.parse(args);
     return {
-      content: [{ type: "text", text: `Echo: ${validateArgs.message}` }],
+      content: [{ type: "text", text: `Echo: ${validatedArgs.message}` }],
     };
   });
 };
