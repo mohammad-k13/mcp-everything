@@ -6,7 +6,8 @@ A complete walkthrough of what MCP resources are, how the protocol works, and ho
 | [Project Structure](structure.md)
 | [Server Features](features.md)
 | [How It Works](how-it-works.md)
-| Resources Guide**
+| Resources Guide
+| [Prompts Guide](prompts-guide.md)**
 
 ---
 
